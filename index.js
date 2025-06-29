@@ -68,6 +68,7 @@ function filterStories(filter) {
 
 // 創建見證功能
 function createStory() {
+  // 20250629 下一階段處理
   alert("導向到創建見證頁面");
 }
 
@@ -111,3 +112,14 @@ window.addEventListener("resize", function () {
     mobileMenu.classList.remove("active");
   }
 });
+
+// 登出功能
+function handleLogout() {
+  // 20250629 confirm之後會換成popup效果
+  if (confirm("確定要登出嗎？")) {
+    // 清除當前用戶信息
+    localStorage.removeItem("currentUser");
+    // 導向到登入頁面
+    window.location.href = "authentication.html";
+  }
+}

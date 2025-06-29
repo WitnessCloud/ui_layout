@@ -1,0 +1,534 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Web3 - 雲見證</title>
+    <link rel="stylesheet" href="./index.css" />
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      body {
+        font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+          "Helvetica Neue", Arial, sans-serif;
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        min-height: 100vh;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+
+      .container {
+        width: 100%;
+        max-width: 400px;
+        padding: 20px;
+      }
+
+      .auth-card {
+        background: rgba(255, 255, 255, 0.95);
+        border-radius: 20px;
+        padding: 40px;
+        box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+        backdrop-filter: blur(10px);
+      }
+
+      .logo {
+        text-align: center;
+        margin-bottom: 30px;
+      }
+
+      .logo h1 {
+        color: #667eea;
+        font-size: 28px;
+        font-weight: 700;
+      }
+
+      .form-group {
+        margin-bottom: 20px;
+      }
+
+      .form-group label {
+        display: block;
+        margin-bottom: 8px;
+        color: #333;
+        font-weight: 500;
+      }
+
+      .form-group input {
+        width: 100%;
+        padding: 12px 16px;
+        border: 2px solid #e1e4e8;
+        border-radius: 10px;
+        font-size: 16px;
+        transition: all 0.3s ease;
+      }
+
+      .form-group input:focus {
+        outline: none;
+        border-color: #667eea;
+        box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+      }
+
+      .btn {
+        width: 100%;
+        padding: 14px;
+        border: none;
+        border-radius: 10px;
+        font-size: 16px;
+        font-weight: 600;
+        cursor: pointer;
+        transition: all 0.3s ease;
+      }
+
+      .btn-primary {
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        color: white;
+      }
+
+      .btn-primary:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 5px 15px rgba(102, 126, 234, 0.4);
+      }
+
+      .divider {
+        text-align: center;
+        margin: 20px 0;
+        color: #666;
+        font-size: 14px;
+      }
+
+      .switch-form {
+        text-align: center;
+        margin-top: 20px;
+        color: #666;
+        font-size: 14px;
+      }
+
+      .switch-form a {
+        color: #667eea;
+        text-decoration: none;
+        font-weight: 600;
+      }
+
+      .switch-form a:hover {
+        text-decoration: underline;
+      }
+
+      .error-message {
+        color: #e74c3c;
+        font-size: 14px;
+        margin-top: 5px;
+        display: none;
+      }
+
+      .success-message {
+        color: #27ae60;
+        font-size: 14px;
+        margin-top: 5px;
+        display: none;
+      }
+
+      /* 主頁面樣式 */
+      .main-container {
+        display: none;
+        width: 100%;
+        min-height: 100vh;
+        background: #0a0b0f;
+      }
+
+      .header {
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        padding: 20px 0;
+        position: fixed;
+        width: 100%;
+        top: 0;
+        z-index: 1000;
+      }
+
+      .nav-container {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 0 20px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+      }
+
+      .nav-logo {
+        color: white;
+        font-size: 24px;
+        font-weight: 700;
+      }
+
+      .nav-menu {
+        display: flex;
+        gap: 30px;
+        list-style: none;
+      }
+
+      .nav-menu a {
+        color: white;
+        text-decoration: none;
+        font-weight: 500;
+        transition: opacity 0.3s;
+      }
+
+      .nav-menu a:hover {
+        opacity: 0.8;
+      }
+
+      .main-content {
+        margin-top: 80px;
+        padding: 40px 20px;
+        max-width: 1200px;
+        margin-left: auto;
+        margin-right: auto;
+      }
+
+      .welcome-section {
+        text-align: center;
+        padding: 60px 20px;
+        background: linear-gradient(
+          135deg,
+          rgba(102, 126, 234, 0.1) 0%,
+          rgba(118, 75, 162, 0.1) 100%
+        );
+        border-radius: 20px;
+        margin-bottom: 40px;
+      }
+
+      .welcome-section h2 {
+        color: white;
+        font-size: 36px;
+        margin-bottom: 20px;
+      }
+
+      .welcome-section p {
+        color: #999;
+        font-size: 18px;
+      }
+
+      .logout-btn {
+        background: rgba(255, 255, 255, 0.2);
+        color: white;
+        padding: 8px 20px;
+        border: 1px solid rgba(255, 255, 255, 0.3);
+        border-radius: 8px;
+        cursor: pointer;
+        transition: all 0.3s;
+      }
+
+      .logout-btn:hover {
+        background: rgba(255, 255, 255, 0.3);
+      }
+
+      .home-link {
+        position: absolute;
+        top: 20px;
+        left: 20px;
+        color: white;
+        text-decoration: none;
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        font-weight: 500;
+        transition: opacity 0.3s;
+      }
+
+      .home-link:hover {
+        opacity: 0.8;
+      }
+
+      .home-link svg {
+        width: 20px;
+        height: 20px;
+      }
+    </style>
+  </head>
+  <body>
+    <!-- 登入/註冊容器 -->
+    <div class="container" id="authContainer">
+      <!-- 回首頁連結 -->
+      <a href="index.html" class="home-link">
+        <svg fill="currentColor" viewBox="0 0 20 20">
+          <path
+            d="M10.707 2.293a1 1 0 00-1.414 0l-7 7a1 1 0 001.414 1.414L4 10.414V17a1 1 0 001 1h2a1 1 0 001-1v-2a1 1 0 011-1h2a1 1 0 011 1v2a1 1 0 001 1h2a1 1 0 001-1v-6.586l.293.293a1 1 0 001.414-1.414l-7-7z"
+          ></path>
+        </svg>
+        回首頁
+      </a>
+
+      <!-- 登入表單 -->
+      <div class="auth-card" id="loginForm">
+        <div class="logo">
+          <h1>Web3 - 雲見證</h1>
+        </div>
+        <form onsubmit="handleLogin(event)">
+          <div class="form-group">
+            <label for="loginEmail">電子郵件</label>
+            <input
+              type="email"
+              id="loginEmail"
+              required
+              placeholder="請輸入您的電子郵件"
+            />
+            <div class="error-message" id="loginEmailError"></div>
+          </div>
+          <div class="form-group">
+            <label for="loginPassword">密碼</label>
+            <input
+              type="password"
+              id="loginPassword"
+              required
+              placeholder="請輸入您的密碼"
+            />
+            <div class="error-message" id="loginPasswordError"></div>
+          </div>
+          <button type="submit" class="btn btn-primary">登入</button>
+          <div class="error-message" id="loginError"></div>
+          <div class="success-message" id="loginSuccess"></div>
+        </form>
+        <div class="switch-form">
+          還沒有帳號？ <a href="#" onclick="showRegister()">立即註冊</a>
+        </div>
+      </div>
+
+      <!-- 註冊表單 -->
+      <div class="auth-card" id="registerForm" style="display: none">
+        <div class="logo">
+          <h1>Web3 - 雲見證</h1>
+        </div>
+        <form onsubmit="handleRegister(event)">
+          <div class="form-group">
+            <label for="registerName">姓名</label>
+            <input
+              type="text"
+              id="registerName"
+              required
+              placeholder="請輸入您的姓名"
+            />
+            <div class="error-message" id="registerNameError"></div>
+          </div>
+          <div class="form-group">
+            <label for="registerEmail">電子郵件</label>
+            <input
+              type="email"
+              id="registerEmail"
+              required
+              placeholder="請輸入您的電子郵件"
+            />
+            <div class="error-message" id="registerEmailError"></div>
+          </div>
+          <div class="form-group">
+            <label for="registerPassword">密碼</label>
+            <input
+              type="password"
+              id="registerPassword"
+              required
+              placeholder="請設定您的密碼（至少6個字元）"
+            />
+            <div class="error-message" id="registerPasswordError"></div>
+          </div>
+          <div class="form-group">
+            <label for="confirmPassword">確認密碼</label>
+            <input
+              type="password"
+              id="confirmPassword"
+              required
+              placeholder="請再次輸入密碼"
+            />
+            <div class="error-message" id="confirmPasswordError"></div>
+          </div>
+          <button type="submit" class="btn btn-primary">註冊</button>
+          <div class="error-message" id="registerError"></div>
+          <div class="success-message" id="registerSuccess"></div>
+        </form>
+        <div class="switch-form">
+          已經有帳號了？ <a href="#" onclick="showLogin()">立即登入</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- 主頁面 -->
+    <!-- <div class="main-container" id="mainContainer">
+      <header class="header">
+        <div class="nav-container">
+          <div class="nav-logo">Web3 - 雲見證</div>
+          <nav>
+            <ul class="nav-menu">
+              <li><a href="#">首頁</a></li>
+              <li><a href="#">關於我</a></li>
+              <li><a href="#">註冊&登入</a></li>
+              <li><a href="#">一般見證</a></li>
+              <li><a href="#">教會資源典藏</a></li>
+              <li><a href="#">IPFS上鏈</a></li>
+            </ul>
+          </nav>
+          <button class="logout-btn" onclick="handleLogout()">登出</button>
+        </div>
+      </header>
+      <main class="main-content">
+        <div class="welcome-section">
+          <h2 id="welcomeMessage">歡迎回來！</h2>
+          <p>一個走遍世界的橋樑。</p>
+          <p>發佈 存到永恆的價值</p>
+        </div>
+      </main>
+    </div> -->
+
+    <script>
+      // 模擬用戶資料庫（實際應用中應使用後端API）
+      let users = JSON.parse(localStorage.getItem("users")) || [];
+      let currentUser = JSON.parse(localStorage.getItem("currentUser")) || null;
+
+      // 檢查是否已登入
+      window.onload = function () {
+        if (currentUser) {
+          showMainPage();
+        }
+      };
+
+      function showLogin() {
+        document.getElementById("loginForm").style.display = "block";
+        document.getElementById("registerForm").style.display = "none";
+        clearMessages();
+      }
+
+      function showRegister() {
+        document.getElementById("loginForm").style.display = "none";
+        document.getElementById("registerForm").style.display = "block";
+        clearMessages();
+      }
+
+      function clearMessages() {
+        const messages = document.querySelectorAll(
+          ".error-message, .success-message"
+        );
+        messages.forEach((msg) => {
+          msg.style.display = "none";
+          msg.textContent = "";
+        });
+      }
+
+      function showError(elementId, message) {
+        const element = document.getElementById(elementId);
+        element.textContent = message;
+        element.style.display = "block";
+      }
+
+      function showSuccess(elementId, message) {
+        const element = document.getElementById(elementId);
+        element.textContent = message;
+        element.style.display = "block";
+      }
+
+      function handleRegister(event) {
+        event.preventDefault();
+        clearMessages();
+
+        const name = document.getElementById("registerName").value;
+        const email = document.getElementById("registerEmail").value;
+        const password = document.getElementById("registerPassword").value;
+        const confirmPassword =
+          document.getElementById("confirmPassword").value;
+
+        // 驗證
+        if (password.length < 6) {
+          showError("registerPasswordError", "密碼至少需要6個字元");
+          return;
+        }
+
+        if (password !== confirmPassword) {
+          showError("confirmPasswordError", "密碼不相符");
+          return;
+        }
+
+        // 檢查郵件是否已註冊
+        if (users.find((user) => user.email === email)) {
+          showError("registerEmailError", "此電子郵件已被註冊");
+          return;
+        }
+
+        // 註冊新用戶
+        const newUser = {
+          id: Date.now(),
+          name,
+          email,
+          password, // 實際應用中應加密存儲
+        };
+
+        users.push(newUser);
+        localStorage.setItem("users", JSON.stringify(users));
+
+        showSuccess("registerSuccess", "註冊成功！即將跳轉至登入頁面...");
+
+        setTimeout(() => {
+          showLogin();
+          document.getElementById("loginEmail").value = email;
+        }, 2000);
+      }
+
+      function handleLogin(event) {
+        event.preventDefault();
+        clearMessages();
+
+        const email = document.getElementById("loginEmail").value;
+        const password = document.getElementById("loginPassword").value;
+
+        // 查找用戶
+        const user = users.find(
+          (u) => u.email === email && u.password === password
+        );
+
+        if (!user) {
+          showError("loginError", "電子郵件或密碼錯誤");
+          return;
+        }
+
+        // 登入成功
+        currentUser = {
+          id: user.id,
+          name: user.name,
+          email: user.email,
+        };
+        localStorage.setItem("currentUser", JSON.stringify(currentUser));
+
+        showSuccess("loginSuccess", "登入成功！");
+
+        setTimeout(() => {
+          showMainPage();
+        }, 1000);
+      }
+
+      function showMainPage() {
+        window.location.assign("index.html");
+        // document.getElementById("authContainer").style.display = "none";
+        // document.getElementById("mainContainer").style.display = "block";
+
+        // if (currentUser) {
+        //   document.getElementById(
+        //     "welcomeMessage"
+        //   ).textContent = `歡迎回來，${currentUser.name}！`;
+        // }
+      }
+
+      function handleLogout() {
+        localStorage.removeItem("currentUser");
+        currentUser = null;
+
+        // 重置表單
+        document.getElementById("loginForm").reset();
+        document.getElementById("registerForm").reset();
+
+        // 顯示登入頁面
+        document.getElementById("authContainer").style.display = "flex";
+        document.getElementById("mainContainer").style.display = "none";
+        showLogin();
+      }
+    </script>
+  </body>
+</html>

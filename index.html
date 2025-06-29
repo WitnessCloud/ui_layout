@@ -1,211 +1,205 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
-    <head>
-        <meta charset="UTF-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <title>Web3 - 雲見證</title>
-        <link rel="stylesheet" href="index.css" />
-    </head>
-    <body>
-        <!-- 導航欄 -->
-        <nav class="navbar">
-            <div class="nav-container">
-                <a href="#" class="logo">Web3 - 雲見證</a>
-                <!-- 桌面版選單 -->
-                <ul class="nav-menu">
-                    <li><a href="#">首頁</a></li>
-                    <li><a href="#">關於我</a></li>
-                    <li><a href="#">註冊&登入</a></li>
-                    <li><a href="#">一般見證</a></li>
-                    <li><a href="#">教會資源典藏</a></li>
-                    <li><a href="#">IPFS上鏈</a></li>
-                </ul>
-                <!-- 漢堡選單按鈕 -->
-                <div class="hamburger" onclick="toggleMenu()">
-                    <span></span>
-                    <span></span>
-                    <span></span>
-                </div>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Web3 - 雲見證</title>
+    <link rel="stylesheet" href="./index.css" />
+    <link rel="stylesheet" href="./components.css" />
+  </head>
+  <body>
+    <!-- 導航欄 -->
+    <nav class="navbar">
+      <div class="nav-container">
+        <a href="#" class="logo">Web3 - 雲見證</a>
+        <!-- 桌面版選單 -->
+        <ul class="nav-menu">
+          <li><a href="#">首頁</a></li>
+          <li><a href="#">關於我</a></li>
+          <li><a href="/authentication.html">註冊&登入</a></li>
+          <li><a href="#">一般見證</a></li>
+          <li><a href="#">教會資源典藏</a></li>
+          <li><a href="#">IPFS上鏈</a></li>
+          <li>
+            <button class="logout-btn" onclick="handleLogout()">登出</button>
+          </li>
+        </ul>
+        <!-- 漢堡選單按鈕 -->
+        <div class="hamburger" onclick="toggleMenu()">
+          <span></span>
+          <span></span>
+          <span></span>
+        </div>
+      </div>
+      <!-- 手機版選單 -->
+      <div class="mobile-menu" id="mobileMenu">
+        <ul>
+          <li><a href="#" onclick="closeMenu()">首頁</a></li>
+          <li><a href="#" onclick="closeMenu()">關於我</a></li>
+          <li><a href="#" onclick="closeMenu()">註冊&登入</a></li>
+          <li><a href="#" onclick="closeMenu()">一般見證</a></li>
+          <li><a href="#" onclick="closeMenu()">教會資源典藏</a></li>
+          <li><a href="#" onclick="closeMenu()">IPFS上鏈</a></li>
+        </ul>
+      </div>
+    </nav>
+
+    <!-- 主要內容 -->
+    <main class="main-content">
+      <p class="hero-text">一個走遍世界的橋樑。</p>
+      <h1 class="section-title">發佈 存到永恆的價值</h1>
+
+      <!-- 標籤切換 -->
+      <div class="tabs">
+        <a href="#" class="tab active" data-filter="all">全部</a>
+        <a href="#" class="tab" data-filter="published">已發布</a>
+        <a href="#" class="tab" data-filter="draft">草稿</a>
+      </div>
+
+      <!-- 見證列表容器 -->
+      <div class="stories-container">
+        <!-- 見證網格 -->
+        <div class="stories-grid" id="storiesGrid">
+          <!-- 見證卡片範例 -->
+          <div class="story-card" data-status="published">
+            <div class="story-image">
+              <div class="placeholder-image">✝️</div>
             </div>
-            <!-- 手機版選單 -->
-            <div class="mobile-menu" id="mobileMenu">
-                <ul>
-                    <li><a href="#" onclick="closeMenu()">首頁</a></li>
-                    <li><a href="#" onclick="closeMenu()">關於我</a></li>
-                    <li><a href="#" onclick="closeMenu()">註冊&登入</a></li>
-                    <li><a href="#" onclick="closeMenu()">一般見證</a></li>
-                    <li><a href="#" onclick="closeMenu()">教會資源典藏</a></li>
-                    <li><a href="#" onclick="closeMenu()">IPFS上鏈</a></li>
-                </ul>
+            <div class="story-content">
+              <h3 class="story-title">神奇妙的醫治恩典</h3>
+              <p class="story-excerpt">
+                在我生命最黑暗的時刻，神伸出祂慈愛的手，不僅醫治了我的身體，更更新了我的心靈。這個見證想要分享神在我生命中的奇妙作為...
+              </p>
+              <div class="story-meta">
+                <span class="story-date">2024年6月20日</span>
+                <span class="story-status published">已發布</span>
+              </div>
+              <div class="story-actions">
+                <a href="#" class="btn btn-view">查看</a>
+                <a href="#" class="btn btn-edit">編輯</a>
+                <button class="btn btn-delete">刪除</button>
+              </div>
             </div>
-        </nav>
+          </div>
 
-        <!-- 主要內容 -->
-        <main class="main-content">
-            <p class="hero-text">一個走遍世界的橋樑。</p>
-            <h1 class="section-title">發佈 存到永恆的價值</h1>
-
-            <!-- 標籤切換 -->
-            <div class="tabs">
-                <a href="#" class="tab active" data-filter="all">全部</a>
-                <a href="#" class="tab" data-filter="published">已發布</a>
-                <a href="#" class="tab" data-filter="draft">草稿</a>
+          <div class="story-card" data-status="draft">
+            <div class="story-image">
+              <div class="placeholder-image">🙏</div>
             </div>
-
-            <!-- 見證列表容器 -->
-            <div class="stories-container">
-                <!-- 見證網格 -->
-                <div class="stories-grid" id="storiesGrid">
-                    <!-- 見證卡片範例 -->
-                    <div class="story-card" data-status="published">
-                        <div class="story-image">
-                            <div class="placeholder-image">✝️</div>
-                        </div>
-                        <div class="story-content">
-                            <h3 class="story-title">神奇妙的醫治恩典</h3>
-                            <p class="story-excerpt">
-                                在我生命最黑暗的時刻，神伸出祂慈愛的手，不僅醫治了我的身體，更更新了我的心靈。這個見證想要分享神在我生命中的奇妙作為...
-                            </p>
-                            <div class="story-meta">
-                                <span class="story-date">2024年6月20日</span>
-                                <span class="story-status published"
-                                    >已發布</span
-                                >
-                            </div>
-                            <div class="story-actions">
-                                <a href="#" class="btn btn-view">查看</a>
-                                <a href="#" class="btn btn-edit">編輯</a>
-                                <button class="btn btn-delete">刪除</button>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="story-card" data-status="draft">
-                        <div class="story-image">
-                            <div class="placeholder-image">🙏</div>
-                        </div>
-                        <div class="story-content">
-                            <h3 class="story-title">職場中的信仰見證</h3>
-                            <p class="story-excerpt">
-                                在充滿挑戰的職場環境中，如何持守信仰並成為光和鹽。分享我在工作中經歷神恩典的真實故事，以及如何在困難中依靠神的智慧...
-                            </p>
-                            <div class="story-meta">
-                                <span class="story-date">2024年6月18日</span>
-                                <span class="story-status draft">草稿</span>
-                            </div>
-                            <div class="story-actions">
-                                <a href="#" class="btn btn-view">預覽</a>
-                                <a href="#" class="btn btn-edit">編輯</a>
-                                <button class="btn btn-delete">刪除</button>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="story-card" data-status="published">
-                        <div class="story-image">
-                            <div class="placeholder-image">❤️</div>
-                        </div>
-                        <div class="story-content">
-                            <h3 class="story-title">家庭和睦的祝福</h3>
-                            <p class="story-excerpt">
-                                原本破碎的家庭關係，在神的愛中得到修復。這是一個關於饒恕、愛與恩典的故事，見證了神如何在家庭中行奇妙的事...
-                            </p>
-                            <div class="story-meta">
-                                <span class="story-date">2024年6月15日</span>
-                                <span class="story-status published"
-                                    >已發布</span
-                                >
-                            </div>
-                            <div class="story-actions">
-                                <a href="#" class="btn btn-view">查看</a>
-                                <a href="#" class="btn btn-edit">編輯</a>
-                                <button class="btn btn-delete">刪除</button>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="story-card" data-status="published">
-                        <div class="story-image">
-                            <div class="placeholder-image">🌟</div>
-                        </div>
-                        <div class="story-content">
-                            <h3 class="story-title">宣教路上的感動</h3>
-                            <p class="story-excerpt">
-                                遠赴海外宣教的經歷，看見神在不同文化中的作為。分享在異鄉傳福音的挑戰與收穫，以及神如何預備和使用每一個願意的心...
-                            </p>
-                            <div class="story-meta">
-                                <span class="story-date">2024年6月12日</span>
-                                <span class="story-status published"
-                                    >已發布</span
-                                >
-                            </div>
-                            <div class="story-actions">
-                                <a href="#" class="btn btn-view">查看</a>
-                                <a href="#" class="btn btn-edit">編輯</a>
-                                <button class="btn btn-delete">刪除</button>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="story-card" data-status="draft">
-                        <div class="story-image">
-                            <div class="placeholder-image">📖</div>
-                        </div>
-                        <div class="story-content">
-                            <h3 class="story-title">讀經心得分享</h3>
-                            <p class="story-excerpt">
-                                透過每日讀經，神的話語如何改變我的生命。分享一些深刻感動的經文和從中得到的啟發，希望能鼓勵更多弟兄姊妹...
-                            </p>
-                            <div class="story-meta">
-                                <span class="story-date">2024年6月10日</span>
-                                <span class="story-status draft">草稿</span>
-                            </div>
-                            <div class="story-actions">
-                                <a href="#" class="btn btn-view">預覽</a>
-                                <a href="#" class="btn btn-edit">編輯</a>
-                                <button class="btn btn-delete">刪除</button>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="story-card" data-status="published">
-                        <div class="story-image">
-                            <div class="placeholder-image">🕊️</div>
-                        </div>
-                        <div class="story-content">
-                            <h3 class="story-title">青年團契的美好時光</h3>
-                            <p class="story-excerpt">
-                                在青年團契中經歷的成長與感動，弟兄姊妹之間的真誠友誼，以及一起服事神的喜樂。這些美好的回憶成為我信仰路上的寶貴財富...
-                            </p>
-                            <div class="story-meta">
-                                <span class="story-date">2024年6月8日</span>
-                                <span class="story-status published"
-                                    >已發布</span
-                                >
-                            </div>
-                            <div class="story-actions">
-                                <a href="#" class="btn btn-view">查看</a>
-                                <a href="#" class="btn btn-edit">編輯</a>
-                                <button class="btn btn-delete">刪除</button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- 空狀態（當沒有見證時顯示） -->
-                <div class="empty-state" id="emptyState" style="display: none">
-                    <div class="empty-icon">📝</div>
-                    <h3>還沒有見證</h3>
-                    <p>
-                        開始分享你的第一個見證，讓神的愛透過你的故事觸動更多人的心。
-                    </p>
-                    <a href="#" class="btn-primary">創建第一個見證</a>
-                </div>
+            <div class="story-content">
+              <h3 class="story-title">職場中的信仰見證</h3>
+              <p class="story-excerpt">
+                在充滿挑戰的職場環境中，如何持守信仰並成為光和鹽。分享我在工作中經歷神恩典的真實故事，以及如何在困難中依靠神的智慧...
+              </p>
+              <div class="story-meta">
+                <span class="story-date">2024年6月18日</span>
+                <span class="story-status draft">草稿</span>
+              </div>
+              <div class="story-actions">
+                <a href="#" class="btn btn-view">預覽</a>
+                <a href="#" class="btn btn-edit">編輯</a>
+                <button class="btn btn-delete">刪除</button>
+              </div>
             </div>
-        </main>
+          </div>
 
-        <!-- 創建見證浮動按鈕 -->
-        <button class="create-story-btn" onclick="createStory()">+</button>
-    </body>
-    <script src="index.js"></script>
+          <div class="story-card" data-status="published">
+            <div class="story-image">
+              <div class="placeholder-image">❤️</div>
+            </div>
+            <div class="story-content">
+              <h3 class="story-title">家庭和睦的祝福</h3>
+              <p class="story-excerpt">
+                原本破碎的家庭關係，在神的愛中得到修復。這是一個關於饒恕、愛與恩典的故事，見證了神如何在家庭中行奇妙的事...
+              </p>
+              <div class="story-meta">
+                <span class="story-date">2024年6月15日</span>
+                <span class="story-status published">已發布</span>
+              </div>
+              <div class="story-actions">
+                <a href="#" class="btn btn-view">查看</a>
+                <a href="#" class="btn btn-edit">編輯</a>
+                <button class="btn btn-delete">刪除</button>
+              </div>
+            </div>
+          </div>
+
+          <div class="story-card" data-status="published">
+            <div class="story-image">
+              <div class="placeholder-image">🌟</div>
+            </div>
+            <div class="story-content">
+              <h3 class="story-title">宣教路上的感動</h3>
+              <p class="story-excerpt">
+                遠赴海外宣教的經歷，看見神在不同文化中的作為。分享在異鄉傳福音的挑戰與收穫，以及神如何預備和使用每一個願意的心...
+              </p>
+              <div class="story-meta">
+                <span class="story-date">2024年6月12日</span>
+                <span class="story-status published">已發布</span>
+              </div>
+              <div class="story-actions">
+                <a href="#" class="btn btn-view">查看</a>
+                <a href="#" class="btn btn-edit">編輯</a>
+                <button class="btn btn-delete">刪除</button>
+              </div>
+            </div>
+          </div>
+
+          <div class="story-card" data-status="draft">
+            <div class="story-image">
+              <div class="placeholder-image">📖</div>
+            </div>
+            <div class="story-content">
+              <h3 class="story-title">讀經心得分享</h3>
+              <p class="story-excerpt">
+                透過每日讀經，神的話語如何改變我的生命。分享一些深刻感動的經文和從中得到的啟發，希望能鼓勵更多弟兄姊妹...
+              </p>
+              <div class="story-meta">
+                <span class="story-date">2024年6月10日</span>
+                <span class="story-status draft">草稿</span>
+              </div>
+              <div class="story-actions">
+                <a href="#" class="btn btn-view">預覽</a>
+                <a href="#" class="btn btn-edit">編輯</a>
+                <button class="btn btn-delete">刪除</button>
+              </div>
+            </div>
+          </div>
+
+          <div class="story-card" data-status="published">
+            <div class="story-image">
+              <div class="placeholder-image">🕊️</div>
+            </div>
+            <div class="story-content">
+              <h3 class="story-title">青年團契的美好時光</h3>
+              <p class="story-excerpt">
+                在青年團契中經歷的成長與感動，弟兄姊妹之間的真誠友誼，以及一起服事神的喜樂。這些美好的回憶成為我信仰路上的寶貴財富...
+              </p>
+              <div class="story-meta">
+                <span class="story-date">2024年6月8日</span>
+                <span class="story-status published">已發布</span>
+              </div>
+              <div class="story-actions">
+                <a href="#" class="btn btn-view">查看</a>
+                <a href="#" class="btn btn-edit">編輯</a>
+                <button class="btn btn-delete">刪除</button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- 空狀態（當沒有見證時顯示） -->
+        <div class="empty-state" id="emptyState" style="display: none">
+          <div class="empty-icon">📝</div>
+          <h3>還沒有見證</h3>
+          <p>開始分享你的第一個見證，讓神的愛透過你的故事觸動更多人的心。</p>
+          <a href="#" class="btn-primary">創建第一個見證</a>
+        </div>
+      </div>
+    </main>
+
+    <!-- 創建見證浮動按鈕 -->
+    <button class="create-story-btn" onclick="createStory()">+</button>
+  </body>
+  <script src="index.js"></script>
 </html>
