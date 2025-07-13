@@ -1,0 +1,265 @@
+/* Quill 編輯器樣式 */
+/* 編輯器容器樣式 */
+.editor-container {
+  max-width: 900px;
+  margin: 2rem auto;
+  padding: 0 2rem;
+}
+
+.editor-wrapper {
+  background: rgba(255, 255, 255, 0.95);
+  border-radius: 20px;
+  overflow: hidden;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+  backdrop-filter: blur(10px);
+}
+
+/* 編輯器標題區域 */
+.editor-header {
+  background: rgba(102, 126, 234, 0.1);
+  padding: 2rem;
+  border-bottom: 1px solid rgba(102, 126, 234, 0.2);
+}
+
+.editor-title {
+  width: 100%;
+  border: none;
+  background: transparent;
+  font-size: 1.8rem;
+  font-weight: 600;
+  color: #333;
+  padding: 0.5rem 0;
+  outline: none;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.editor-title::placeholder {
+  color: #999;
+}
+
+/* Quill 編輯器自訂樣式 */
+.ql-toolbar {
+  background: rgba(248, 249, 250, 0.8);
+  border: none !important;
+  border-bottom: 1px solid rgba(102, 126, 234, 0.1) !important;
+  padding: 1rem !important;
+}
+
+.ql-toolbar button {
+  color: #666 !important;
+  transition: all 0.3s ease;
+}
+
+.ql-toolbar button:hover {
+  color: #667eea !important;
+  transform: translateY(-1px);
+}
+
+.ql-toolbar button.ql-active {
+  color: #764ba2 !important;
+}
+
+.ql-toolbar .ql-stroke {
+  stroke: #666 !important;
+}
+
+.ql-toolbar .ql-fill {
+  fill: #666 !important;
+}
+
+.ql-toolbar button:hover .ql-stroke {
+  stroke: #667eea !important;
+}
+
+.ql-toolbar button:hover .ql-fill {
+  fill: #667eea !important;
+}
+
+.ql-toolbar button.ql-active .ql-stroke {
+  stroke: #764ba2 !important;
+}
+
+.ql-toolbar button.ql-active .ql-fill {
+  fill: #764ba2 !important;
+}
+
+/* 編輯器主體 */
+#editor {
+  min-height: 400px;
+  font-size: 1.1rem;
+  line-height: 1.8;
+  color: #333;
+  padding: 2rem 15px;
+}
+
+.ql-container {
+  border: none !important;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.ql-editor {
+  padding: 0 1rem !important;
+}
+
+.ql-editor.ql-blank::before {
+  left: calc(1rem + 15px) !important;
+  right: calc(1rem + 15px) !important;
+}
+
+.ql-editor h1 {
+  font-size: 2rem;
+  color: #333;
+  margin: 1.5rem 0 1rem;
+}
+
+.ql-editor h2 {
+  font-size: 1.5rem;
+  color: #444;
+  margin: 1.3rem 0 0.8rem;
+}
+
+.ql-editor h3 {
+  font-size: 1.3rem;
+  color: #555;
+  margin: 1.2rem 0 0.6rem;
+}
+
+.ql-editor blockquote {
+  border-left: 4px solid #667eea;
+  padding-left: 1.5rem;
+  margin: 1.5rem 0;
+  color: #666;
+  font-style: italic;
+}
+
+.ql-editor pre {
+  background: #f8f9fa;
+  border-radius: 8px;
+  padding: 1rem;
+  margin: 1rem 0;
+  overflow-x: auto;
+}
+
+.ql-editor a {
+  color: #667eea;
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+
+.ql-editor a:hover {
+  color: #764ba2;
+  text-decoration: underline;
+}
+
+/* 底部操作區域 */
+.editor-footer {
+  background: rgba(248, 249, 250, 0.8);
+  padding: 2rem;
+  border-top: 1px solid rgba(102, 126, 234, 0.1);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+.editor-meta {
+  display: flex;
+  gap: 1.5rem;
+  flex-wrap: wrap;
+}
+
+.meta-item {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  color: #666;
+  font-size: 0.9rem;
+}
+
+.editor-actions {
+  display: flex;
+  gap: 1rem;
+}
+
+.btn-editor {
+  padding: 0.8rem 1.5rem;
+  border-radius: 30px;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  text-decoration: none;
+  border: none;
+  font-weight: 500;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.btn-save-draft {
+  background: rgba(255, 193, 7, 0.1);
+  color: #d39e00;
+  border: 1px solid rgba(255, 193, 7, 0.3);
+}
+
+.btn-save-draft:hover {
+  background: rgba(255, 193, 7, 0.2);
+  transform: translateY(-2px);
+  box-shadow: 0 5px 15px rgba(255, 193, 7, 0.2);
+}
+
+.btn-publish {
+  background: linear-gradient(135deg, #667eea, #764ba2);
+  color: white;
+}
+
+.btn-publish:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 5px 15px rgba(102, 126, 234, 0.3);
+}
+
+.btn-cancel {
+  background: #f8f9fa;
+  color: #666;
+  border: 1px solid #e9ecef;
+}
+
+.btn-cancel:hover {
+  background: #e9ecef;
+  transform: translateY(-2px);
+}
+
+/* 響應式設計 */
+@media (max-width: 768px) {
+  .editor-container {
+    padding: 0 1rem;
+    margin: 1rem auto;
+  }
+
+  .editor-header,
+  .editor-footer {
+    padding: 1.5rem;
+  }
+
+  #editor {
+    padding: 1.5rem;
+    min-height: 300px;
+  }
+
+  .editor-title {
+    font-size: 1.5rem;
+  }
+
+  .editor-footer {
+    flex-direction: column;
+  }
+
+  .editor-meta {
+    width: 100%;
+    justify-content: center;
+  }
+
+  .editor-actions {
+    width: 100%;
+    justify-content: center;
+  }
+}
+/* Quill 編輯器樣式結束 */

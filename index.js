@@ -68,7 +68,8 @@ function filterStories(filter) {
 
 // 創建見證功能
 function createStory() {
-  alert("導向到創建見證頁面");
+  // alert("導向到創建見證頁面");
+  location.assign("testimony.html");
 }
 
 // 刪除見證功能
